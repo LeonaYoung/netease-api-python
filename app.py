@@ -20,6 +20,14 @@ def songs(song_id):
     return fetch('GET', location)
 
 
+@app.route('/lrc/<int:lrc_id>', methods=['GET'])
+def songs(song_id):
+
+    location = '/api/song/lyric?lv={0}&id={1}'.format(song_id, -1)
+
+    return fetch('GET', location)
+
+
 def fetch(method, location):
     origin = 'http://music.163.com'
     url = origin + location
