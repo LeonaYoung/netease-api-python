@@ -15,7 +15,7 @@ def search(name):
 @app.route('/songs/<int:song_id>', methods=['GET'])
 def songs(song_id):
 
-    location = '/api/song/detail?ids=%5B%d%5d' % song_id
+    location = '/api/song/detail?ids=%5B{0}%5d'.format(song_id)
 
     return fetch('GET', location)
 
