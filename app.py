@@ -23,7 +23,7 @@ def songs(song_id):
 @app.route('/lyrc/<int:lyrc_id>', methods=['GET'])
 def lyrc(lyrc_id):
 
-    location = '/api/song/lyric?lv={0}&id={1}'.format(lyrc_id, lyrc_id)
+    location = '/api/song/lyric?lv={0}&id={1}'.format(-1, lyrc_id)
 
     return fetch('GET', location)
 
