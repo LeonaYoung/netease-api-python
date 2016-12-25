@@ -6,13 +6,29 @@ app = Flask(__name__)
 
 @app.route('/search/<string:name>', methods=['POST'])
 def index(name):
+    location = '/api/search/suggest/web'
+    location += '?s=%s&limit=30&offset=0&type=1' % name    # set search params
+
+    return fetch('POST', location)
+
+@app.route('/songs/<int:song_id>', methods=['GET'])
+def index(song_id):
+
+
+    location = '/api/song/detail?ids=%5B%s%5d' % song_id
+
+    return fetch('GET', location)
+
+def fetch(method, location):
     origin = 'http://music.163.com'
-    url = origin + '/api/search/suggest/web'
-    url += '?s=%s&limit=30&offset=0&type=1' % name    # set search params
+    url = origin + location
 
     headers = {'Origin': origin, 'Referer': origin, 'Accept': 'application/json', 'Content-Type': 'application/json'}
 
-    req = requests.post(url, headers=headers)
+    if method == 'GET':
+        req = requests.get(url, headers=headers)
+    else if method == 'POST':
+        req = requests.post(url, headers=headers)
 
     print '>', url
     return req.text
